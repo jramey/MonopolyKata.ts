@@ -1,4 +1,4 @@
-import {} from "jasmine";
+import { } from "jasmine";
 
 describe("Player", () => {
     let car: Player;
@@ -8,7 +8,7 @@ describe("Player", () => {
     beforeEach(() => {
         car = new Player("Car");
         horse = new Player("Horse");
-        game = new Game([ car, horse ], new GameDice(), new Shuffle());
+        game = new Game([car, horse], new GameDice(), new Shuffle());
     });
 
     it("is created with name", () => {
@@ -19,5 +19,10 @@ describe("Player", () => {
     it("is created with location of zero", () => {
         expect(car.location).toBe(0);
         expect(horse.location).toBe(0);
+    });
+
+    it("is created with balance of zero", () => {
+        expect(car.balance).toBe(0);
+        expect(horse.balance).toBe(0);
     });
 });

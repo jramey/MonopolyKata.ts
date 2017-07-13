@@ -4,12 +4,16 @@ class Game {
     private players: Player[];
     private dice: Dice;
     private shuffle: Shuffle;
+    private board: Board;
+    private playerMovement: PlayerMovement;
 
     constructor(players: Player[], dice: Dice, shuffle: Shuffle) {
         this.players = players;
         this.dice = dice;
         this.turns = new Array<Turn>();
         this.shuffle = shuffle;
+        this.board = new GameBoard();
+        this.playerMovement = new PlayerMovement(this.board);
     }
 
     public startGame(): void {
@@ -29,7 +33,7 @@ class Game {
     }
 
     private takeTurn(player: Player): void {
-        const turn = new Turn(player, this.dice);
+        const turn = new Turn(player, this.dice, this.playerMovement);
         this.turns.push(turn);
         turn.take();
     }
