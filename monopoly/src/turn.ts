@@ -1,20 +1,26 @@
 class Turn {
-    private player: Player;
+    private token: Token;
     private dice: Dice;
-    private playerMovement: PlayerMovement;
+    private movement: Movement;
+    private board: Board;
 
-    constructor(player: Player, dice: Dice, playerMovement: PlayerMovement) {
-        this.player = player;
+    constructor(token: Token, dice: Dice, movement: Movement, board: Board) {
+        this.token = token;
         this.dice = dice;
-        this.playerMovement = playerMovement;
+        this.movement = movement;
+        this.board = board;
     }
 
     public take(): void {
         const spacesToMove = this.dice.roll();
-        this.playerMovement.movePlayer(this.player, spacesToMove);
+        this.movement.movePlayer(this.token, spacesToMove);
+
+        // tslint:disable-next-line:max-line-length
+        const currentSpace = this.board.getSpaceAtLocation(this.movement.getLocationOfToken(this.token)) as Space;
+        currentSpace.landOn(this.token);
     }
 
-    public getPlayerName(): string {
-        return this.player.name;
+    public getTokenName(): string {
+        return this.token.getName();
     }
 }

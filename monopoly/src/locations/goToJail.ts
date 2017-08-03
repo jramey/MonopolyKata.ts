@@ -1,12 +1,12 @@
 class GoToJail extends BoardLocation {
-    private board: Board;
+    private movement: Movement;
 
-    constructor(board: Board) {
+    constructor(movement: Movement) {
         super(30);
-        this.board = board;
+        this.movement = movement;
     }
 
-    public landOn(player: Player): void {
-        player.movePlayer(this.board.JailLocation);
+    public landOn(token: Token): void {
+        this.movement.takeToJail(token);
     }
 }

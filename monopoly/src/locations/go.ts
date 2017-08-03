@@ -1,9 +1,12 @@
 class Go extends BoardLocation {
-    constructor() {
+    private banker: Banker;
+
+    constructor(banker: Banker) {
         super(0);
+        this.banker = banker;
     }
 
-    public landOn(player: Player): void {
-        player.balance += 200;
+    public landOn(token: Token): void {
+       this.banker.increaseBalance(token, 200);
     }
 }

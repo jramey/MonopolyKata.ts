@@ -10,4 +10,8 @@ class FakeDice implements Dice {
         this.rollOne = rollOne;
         this.rollTwo = rollTwo;
     }
+
+    public isDoubles(): boolean {
+        return this.rollOne === this.rollTwo;
+    }
 }

@@ -2,11 +2,13 @@ import { } from "jasmine";
 
 describe("Game", () => {
     it("landing on go increases players balance by two hundred dollars", () => {
-        const goSpace = new Go();
-        const player = new Player("Car");
+        const token = new Token("Car");
+        const banker = new Banker([token]);
+        const goSpace = new Go(banker);
+        const beginningBalance = banker.getBalance(token);
 
-        goSpace.landOn(player);
+        goSpace.landOn(token);
 
-        expect(player.balance).toBe(200);
+        expect(banker.getBalance(token)).toBe(beginningBalance + 200);
     });
 });

@@ -1,4 +1,4 @@
-class BoardLocation implements Space {
+abstract class BoardLocation implements Space {
     public location: number;
 
     constructor(location: number) {
@@ -6,5 +6,5 @@ class BoardLocation implements Space {
     }
 
     // tslint:disable-next-line:no-empty
-    public landOn(player: Player): void { }
+    public landOn(player: Token): void { }
 }

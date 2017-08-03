@@ -1,14 +1,17 @@
 class IncomeTax extends BoardLocation {
-    constructor() {
+    private banker: Banker;
+
+    constructor(banker: Banker) {
         super(4);
+        this.banker = banker;
     }
 
-    public landOn(player: Player): void {
-        const tenPercentOfTotalWorth = player.balance * .1;
+    public landOn(token: Token): void {
+        const tenPercentOfTotalWorth = this.banker.getBalance(token) * .1;
 
         if (tenPercentOfTotalWorth > 200)
-            player.balance -= 200;
+            this.banker.decreaseBalance(token, 200);
         else
-            player.balance -= tenPercentOfTotalWorth;
+            this.banker.decreaseBalance(token, tenPercentOfTotalWorth);
     }
 }

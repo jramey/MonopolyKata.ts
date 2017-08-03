@@ -1,9 +1,12 @@
 class LuxuryTax extends BoardLocation {
-    constructor() {
+    private banker: Banker;
+
+    constructor(banker: Banker) {
         super(38);
+        this.banker = banker;
     }
 
-    public landOn(player: Player): void {
-        player.balance -= 75;
+    public landOn(token: Token): void {
+        this.banker.decreaseBalance(token, 75);
     }
 }

@@ -1,39 +1,39 @@
 class Game {
     public turns: Turn[];
 
-    private players: Player[];
+    private tokens: Token[];
     private dice: Dice;
     private shuffle: Shuffle;
     private board: Board;
-    private playerMovement: PlayerMovement;
+    private movement: Movement;
 
-    constructor(players: Player[], dice: Dice, shuffle: Shuffle) {
-        this.players = players;
+    constructor(tokens: Token[], dice: Dice, shuffle: Shuffle, banker: Banker, movement: Movement, board: Board) {
+        this.tokens = tokens;
         this.dice = dice;
         this.turns = new Array<Turn>();
         this.shuffle = shuffle;
-        this.board = new GameBoard();
-        this.playerMovement = new PlayerMovement(this.board);
+        this.movement = movement;
+        this.board = board;
     }
 
     public startGame(): void {
-        this.verifyNumberOfPlayers();
-        this.players = this.shuffle.shuffle(this.players);
+        this.verifyNumberOfTokens();
+        this.tokens = this.shuffle.shuffle(this.tokens);
     }
 
-    public verifyNumberOfPlayers(): void {
-        if (this.players.length < 2 || this.players.length > 8)
-            throw new RangeError("Invalid number of players");
+    public verifyNumberOfTokens(): void {
+        if (this.tokens.length < 2 || this.tokens.length > 8)
+            throw new RangeError("Invalid number of tokens");
     }
 
     public playRound(): void {
-        this.players.forEach(player => {
-            this.takeTurn(player);
+        this.tokens.forEach(token => {
+            this.takeTurn(token);
         });
     }
 
-    private takeTurn(player: Player): void {
-        const turn = new Turn(player, this.dice, this.playerMovement);
+    private takeTurn(token: Token): void {
+        const turn = new Turn(token, this.dice, this.movement, this.board);
         this.turns.push(turn);
         turn.take();
     }

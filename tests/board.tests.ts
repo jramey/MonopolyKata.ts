@@ -4,7 +4,11 @@ describe("Board", () => {
     let board: Board;
 
     beforeEach(() => {
-        board = new GameBoard();
+        const tokens = new Array<Token>(new Token("Car"));
+        const banker = new Banker(tokens);
+        const movement = new Movement(tokens, [new PassingGoRule(banker)]);
+        const boardFactory = new BoardFactory();
+        board = boardFactory.createBoard(banker, movement);
     });
 
     it("go is at index zero", () => {
@@ -27,8 +31,8 @@ describe("Board", () => {
         expect(space).toEqual(jasmine.any(LuxuryTax));
     });
 
-    it("null space is returned", () => {
+    it("property space is returned", () => {
         const space = board.getSpaceAtLocation(1);
-        expect(space).toEqual(jasmine.any(NullBoardLocation));
+        expect(space).toEqual(jasmine.any(Property));
     });
 });

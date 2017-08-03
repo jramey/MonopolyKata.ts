@@ -1,12 +1,8 @@
 class GameBoard implements Board {
-    public readonly NumberOfSpaces = 40;
-    public readonly JailLocation = 10;
-
     private locations: BoardLocation[];
 
-    constructor() {
-        this.locations = [new Go(), new IncomeTax(),
-        new LuxuryTax(), new GoToJail(this)];
+    constructor(locations: BoardLocation[]) {
+        this.locations = locations;
     }
 
     public getSpaceAtLocation(index: number): BoardLocation {

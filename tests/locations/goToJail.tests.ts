@@ -2,12 +2,12 @@ import { } from "jasmine";
 
 describe("Go to Jail", () => {
     it("landing on go to jail moves player to jail location", () => {
-        const board = new GameBoard();
-        const goToJailSpace = new GoToJail(board);
-        const player = new Player("Car");
+        const token = new Token("Car");
+        const movement = new Movement([token], [new PassingGoRule(new Banker([token]))]);
+        const goToJailSpace = new GoToJail(movement);
 
-        goToJailSpace.landOn(player);
+        goToJailSpace.landOn(token);
 
-        expect(player.location).toBe(board.JailLocation);
+        expect(movement.getLocationOfToken(token)).toBe(10);
     });
 });

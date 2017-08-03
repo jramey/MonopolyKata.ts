@@ -1,6 +1,4 @@
 class FakeBoard implements Board {
-    public NumberOfSpaces: number;
-    public JailLocation: number;
     private space: BoardLocation;
 
     constructor(space: BoardLocation) {

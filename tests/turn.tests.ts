@@ -1,16 +1,21 @@
 import { } from "jasmine";
 
 describe("Turn", () => {
-    let car: Player;
-    let horse: Player;
+    let car: Token;
+    let horse: Token;
     let game: Game;
     let fakeDice: FakeDice;
+    let banker: Banker;
+    let movement: Movement;
 
     beforeEach(() => {
-        car = new Player("Car");
-        horse = new Player("Horse");
+        car = new Token("Car");
+        horse = new Token("Horse");
         fakeDice = new FakeDice();
-        game = new Game([car, horse], fakeDice, new Shuffle());
+        banker = new Banker([car, horse]);
+        movement = new Movement([car, horse], [new PassingGoRule(banker)]);
+        const gameFactory = new GameFactory();
+        game = gameFactory.createGame([car, horse], fakeDice, movement);
     });
 
     it("player lands on space seven after rolling a seven", () => {
@@ -19,16 +24,18 @@ describe("Turn", () => {
         game.startGame();
         game.playRound();
 
-        expect(car.location).toBe(7);
+        expect(movement.getLocationOfToken(car)).toBe(7);
     });
 
     it("player lands on space five after rolling a six from space 39", () => {
-        car.location = 39;
+        movement.movePlayer(car, 39);
         fakeDice.loadDice(5, 1);
+        banker.increaseBalance(car, 5000);
+        banker.increaseBalance(horse, 5000);
 
         game.startGame();
         game.playRound();
 
-        expect(car.location).toBe(5);
+        expect(movement.getLocationOfToken(car)).toBe(5);
     });
 });

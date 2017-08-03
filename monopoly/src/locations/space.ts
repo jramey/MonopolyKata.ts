@@ -1,3 +1,3 @@
 interface Space {
-    landOn(player: Player): void;
+    landOn(player: Token): void;
 }

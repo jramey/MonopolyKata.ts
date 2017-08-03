@@ -2,22 +2,26 @@ import { } from "jasmine";
 
 describe("Income Tax", () => {
     it("landing on income tax decrease players balance by 200 dollars when ten percent is greater than 200", () => {
-        const incomeTaxSpace = new IncomeTax();
-        const player = new Player("Car");
-        player.balance = 4000;
+        const token = new Token("Car");
+        const banker = new Banker([token]);
+        banker.increaseBalance(token, 4000);
+        const incomeTaxSpace = new IncomeTax(banker);
+        const beginningBalance = banker.getBalance(token);
 
-        incomeTaxSpace.landOn(player);
+        incomeTaxSpace.landOn(token);
 
-        expect(player.balance).toBe(3800);
+        expect(banker.getBalance(token)).toBe(beginningBalance - 200);
     });
 
-    it("landing on income tax decrease players balance by ten percent when greater than 200", () => {
-        const incomeTaxSpace = new IncomeTax();
-        const player = new Player("Car");
-        player.balance = 100;
+    it("landing on income tax decrease players balance by ten percent when less than 200", () => {
+        const token = new Token("Car");
+        const banker = new Banker([token]);
+        banker.decreaseBalance(token, 100);
+        const incomeTaxSpace = new IncomeTax(banker);
+        const beginningBalance = banker.getBalance(token);
 
-        incomeTaxSpace.landOn(player);
+        incomeTaxSpace.landOn(token);
 
-        expect(player.balance).toBe(90);
+        expect(banker.getBalance(token)).toBe(beginningBalance - 10);
     });
 });

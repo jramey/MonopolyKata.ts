@@ -4,5 +4,5 @@ class NullBoardLocation extends BoardLocation {
     }
 
     // tslint:disable-next-line:no-empty
-    public landOn(player: Player): void { }
+    public landOn(player: Token): void { }
 }
