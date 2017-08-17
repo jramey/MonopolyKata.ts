@@ -20,7 +20,7 @@ describe("Railroad", () => {
         realEstateManger.setProperties(utilities);
         board = new GameBoard(utilities);
 
-        dice.loadDice(1, 1);
+        dice.loadDice([new DiceRoll(1, 1)]);
         banker.increaseBalance(owner, 1000);
     });
 

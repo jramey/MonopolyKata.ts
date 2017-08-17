@@ -1,9 +1,8 @@
 class GameFactory {
-    public createGame(tokens: Token[], dice: Dice, movement: Movement) {
+    public createGame(tokens: Token[], dice: Dice, movement: Movement, banker: Banker, jailor: Jailor) {
         const shuffle = new Shuffle();
-        const banker = new Banker(tokens);
         const board = new BoardFactory().createBoard(banker, movement);
 
-        return new Game(tokens, dice, shuffle, banker, movement, board);
+        return new Game(tokens, dice, shuffle, banker, movement, board, jailor);
     }
 }

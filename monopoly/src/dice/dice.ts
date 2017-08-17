@@ -1,4 +1,5 @@
 interface Dice {
-    roll(): number;
+    roll(): void;
+    value(): number;
     isDoubles(): boolean;
 }

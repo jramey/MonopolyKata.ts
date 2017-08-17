@@ -1,10 +1,12 @@
 class Movement {
     private movementRules: Rule[];
     private tokenLocations: TokenLocation[];
+    private jailor: Jailor;
 
-    constructor(tokens: Token[], movementRules: Rule[]) {
+    constructor(tokens: Token[], movementRules: Rule[], jailor: Jailor) {
         this.movementRules = movementRules;
         this.tokenLocations = new Array<TokenLocation>();
+        this.jailor = jailor;
         this.setupLocationsForTokens(tokens);
     }
 
@@ -23,6 +25,7 @@ class Movement {
     public takeToJail(token: Token): void {
         const tokenLocation = this.getLocationForToken(token);
         tokenLocation.setLocation(10);
+        this.jailor.book(token);
     }
 
     public getLocationOfToken(token: Token): number {

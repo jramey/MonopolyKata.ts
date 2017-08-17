@@ -5,7 +5,8 @@ describe("Movement", () => {
         const token = new Token("Car");
         const tokens = new Array<Token>(token);
         const banker = new Banker(tokens);
-        const movement = new Movement(tokens, [new PassingGoRule(banker)]);
+        const jailor = new Jailor();
+        const movement = new Movement(tokens, [new PassingGoRule(banker)], jailor);
         const boardFactory = new BoardFactory();
         const board = boardFactory.createBoard(banker, movement);
 

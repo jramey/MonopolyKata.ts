@@ -5,17 +5,22 @@ class GameDice implements Dice {
     private diOne: number;
     private diTwo: number;
 
-    public roll(): number {
+    public roll(): void {
         this.diOne = (Math.floor(Math.random()
             * (this.maxValue - this.minValue + 1)) + this.minValue);
 
         this.diTwo = (Math.floor(Math.random()
             * (this.maxValue - this.minValue + 1)) + this.minValue);
-
-        return this.diOne + this.diTwo;
     }
 
     public isDoubles(): boolean {
         return this.diOne === this.diTwo;
+    }
+
+    public value(): number {
+        if (this.diOne === undefined || this.diTwo === undefined)
+            this.roll();
+
+        return this.diOne + this.diTwo;
     }
 }

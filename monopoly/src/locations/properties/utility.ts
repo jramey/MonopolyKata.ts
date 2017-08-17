@@ -17,11 +17,11 @@ class Utility extends Property {
     }
 
     private payOwnerRent(token: Token): void {
-        const diceValue = this.dice.roll();
-        let amount = diceValue * 4;
+        this.dice.roll();
+        let amount = this.dice.value() * 4;
 
         if (this.realEstateManger.allPropertiesInGroupingAreOwned(this.grouping))
-            amount = diceValue * 10;
+            amount = this.dice.value() * 10;
 
         this.banker.transferRent(token, this.owner, amount);
     }

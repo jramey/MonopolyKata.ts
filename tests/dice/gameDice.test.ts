@@ -5,7 +5,8 @@ describe("Game Dice", () => {
         const dice = new GameDice();
 
         for (let i = 0; i < 1000; i++) {
-            const roll = dice.roll();
+            dice.roll();
+            const roll = dice.value();
             expect(roll).toBeLessThanOrEqual(12);
         }
     });
@@ -14,7 +15,8 @@ describe("Game Dice", () => {
         const dice = new GameDice();
 
         for (let i = 0; i < 1000; i++) {
-            const roll = dice.roll();
+            dice.roll();
+            const roll = dice.value();
             expect(roll).toBeGreaterThanOrEqual(1);
         }
     });

@@ -10,7 +10,8 @@
         "lib": [
             "dom",
             "es5"
-        ]
+        ],
+        "strictNullChecks": false
     },
     "exclude": [
         "node_modules"

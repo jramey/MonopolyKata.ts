@@ -6,7 +6,8 @@ describe("Board", () => {
     beforeEach(() => {
         const tokens = new Array<Token>(new Token("Car"));
         const banker = new Banker(tokens);
-        const movement = new Movement(tokens, [new PassingGoRule(banker)]);
+        const jailor = new Jailor();
+        const movement = new Movement(tokens, [new PassingGoRule(banker)], jailor);
         const boardFactory = new BoardFactory();
         board = boardFactory.createBoard(banker, movement);
     });
