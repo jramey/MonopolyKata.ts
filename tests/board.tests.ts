@@ -9,7 +9,7 @@ describe("Board", () => {
         const jailor = new Jailor();
         const movement = new Movement(tokens, [new PassingGoRule(banker)], jailor);
         const boardFactory = new BoardFactory();
-        board = boardFactory.createBoard(banker, movement);
+        board = boardFactory.createBoard(banker, movement, tokens);
     });
 
     it("go is at index zero", () => {

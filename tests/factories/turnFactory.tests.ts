@@ -17,7 +17,7 @@ describe("Turn Factory", () => {
         dice = new GameDice();
         movement = new Movement(tokens, [new PassingGoRule(banker)], jailor);
         const boardFactory = new BoardFactory();
-        board = boardFactory.createBoard(banker, movement);
+        board = boardFactory.createBoard(banker, movement, tokens);
         turnFactory = new TurnFactory();
     });
 

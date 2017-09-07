@@ -61,15 +61,15 @@ describe("Turn", () => {
         expect(jailor.isInJail(car)).toBe(true);
 
         fakeDice.loadDice([new DiceRoll(2, 2),
-        new DiceRoll(1, 2),
+        new DiceRoll(3, 2),
         new DiceRoll(2, 2),
-        new DiceRoll(1, 2)]);
+        new DiceRoll(3, 2)]);
 
         game.startGame();
         game.playRound();
 
         expect(jailor.isInJail(car)).toBe(false);
-        expect(movement.getLocationOfToken(car)).toBe(17);
+        expect(movement.getLocationOfToken(car)).toBe(19);
     });
 
     it("player does not get out of jail without doubles", () => {

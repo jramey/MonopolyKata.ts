@@ -8,7 +8,7 @@ describe("Movement", () => {
         const jailor = new Jailor();
         const movement = new Movement(tokens, [new PassingGoRule(banker)], jailor);
         const boardFactory = new BoardFactory();
-        const board = boardFactory.createBoard(banker, movement);
+        const board = boardFactory.createBoard(banker, movement, tokens);
 
         movement.movePlayer(token, 39);
 

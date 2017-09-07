@@ -1,12 +1,23 @@
 class BoardFactory {
-    public createBoard(banker: Banker, movement: Movement): Board {
+    public createBoard(banker: Banker, movement: Movement, tokens: Token[]): Board {
         const realEstateManger = new RealEstateManger();
+        const chanceDeck = new Array<Card>();
+        const communityChestDeck = new Array<Card>();
+
+        this.setupChanceDeck(chanceDeck, tokens, banker, movement);
+        this.setupCommunityChestDeck(communityChestDeck, movement, banker);
 
         const spaces = [
             new Go(banker),
             new IncomeTax(banker),
             new GoToJail(movement),
-            new LuxuryTax(banker)];
+            new LuxuryTax(banker),
+            new DrawCardLocation(7, chanceDeck),
+            new DrawCardLocation(20, chanceDeck),
+            new DrawCardLocation(36, chanceDeck),
+            new DrawCardLocation(2, communityChestDeck),
+            new DrawCardLocation(17, communityChestDeck),
+            new DrawCardLocation(33, communityChestDeck)];
 
         const properties = [
             new Property("Mediterranean Ave.", 1, 100, 12, banker, PropertyGrouping.DarkPurple),
@@ -41,5 +52,19 @@ class BoardFactory {
         locations = locations.concat(properties).concat(spaces);
 
         return new GameBoard(locations);
+    }
+
+    private setupChanceDeck(chanceDeck: Card[], tokens: Token[], banker: Banker, movement: Movement): void {
+        chanceDeck.push(new ChairmanOfTheBoard(tokens, banker));
+        chanceDeck.push(new IncreaseBalance(100, banker)); // You have won a crossword competition
+        chanceDeck.push(new DecreaseBalance(15, banker)); // Pay poor tax of $15
+        chanceDeck.push(new GoDirectlyToJail(movement));
+        chanceDeck.push(new IncreaseBalance(50, banker)); // Bank pays you dividend of $50
+    }
+
+    private setupCommunityChestDeck(communityChestDeck: Card[], movement: Movement, banker: Banker): void {
+        communityChestDeck.push(new AdvanceToGo(movement, banker));
+        communityChestDeck.push(new GoDirectlyToJail(movement));
+        communityChestDeck.push(new DecreaseBalance(50, banker)); // Doctor's fees
     }
 }
